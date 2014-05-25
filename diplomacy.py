@@ -1,5 +1,6 @@
 from random import randrange
-import collections
+from secret import *
+import tweepy, time, sys, collections
 
 # Get words
 corpus = open("corpus.txt", "r")
@@ -24,11 +25,9 @@ def createWordMap(wordLines):
 
 	return [startWords, wordMap]
 
+# Calculate the total number of characters in the elements of an array
 def calculateChars(array):
-	char = 0
-	for element in array:
-		char += len(element)
-	return char
+	return len(' '.join(array))
 
 # Returns true if the contents of the array is under Twitter's character limit
 def underLimit(array):
@@ -67,4 +66,13 @@ def genTweet(array):
 
 
 tweet = genTweet(createWordMap(wordLines))
-print ' '.join(tweet)
+message = ' '.join(tweet)
+print message
+print calculateChars(tweet)
+
+# Publish to Twitter
+auth = tweepy.OAuthHandler(API_KEY, API_SECRET)
+auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+
+api = tweepy.API(auth)
+api.update_status(message)
