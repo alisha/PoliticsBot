@@ -64,9 +64,31 @@ def genTweet(array):
 		else:
 			return tweetArray
 
+# Get and trim message
+hasMessage = False
 
-tweet = genTweet(createWordMap(wordLines))
-message = ' '.join(tweet)
+while hasMessage is False:
+	tweet = genTweet(createWordMap(wordLines))
+	message = ' '.join(tweet)
+	
+	currentChar = len(message) - 1
+	lastPeriod = 0
+
+	while currentChar >= 0:
+		newMessage = message
+		char = newMessage[currentChar]
+		
+		if char is ".":
+			lastPeriod = currentChar
+			currentChar = -1
+		else:
+			currentChar = currentChar - 1
+
+	message = message[0:lastPeriod+1]
+
+	if len(message) is not 1:
+		hasMessage = True
+
 print message
 print calculateChars(tweet)
 
