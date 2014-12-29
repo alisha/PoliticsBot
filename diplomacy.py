@@ -1,13 +1,18 @@
+#!/usr/bin/python
+
 from random import randrange
+import sys, os, tweepy
 from secret import *
-import tweepy, time, sys, collections
 
 # Get words
-corpus = open("corpus.txt", "r")
+corpusPath = os.path.dirname(os.path.realpath(__file__)) + "/corpus.txt"
+corpus = open(corpusPath, "r")
 wordLines = corpus.readlines()
 
 for line in range(0, len(wordLines)-2):
 	wordLines[line] = wordLines[line][:-1]
+
+corpus.close()
 
 # Store the start of sentences
 sentenceStarters = []
@@ -102,7 +107,7 @@ def createGoodTweet(wordLines):
 	message.capitalize()
 
 	return message
-
+'''
 # Publish to Twitter
 def tweet():
 	auth = tweepy.OAuthHandler(API_KEY, API_SECRET)
@@ -117,3 +122,6 @@ def tweet():
 		print "Found duplicate tweet"
 
 tweet()
+'''
+
+print createGoodTweet(wordLines)
