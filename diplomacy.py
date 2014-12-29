@@ -107,7 +107,7 @@ def createGoodTweet(wordLines):
 	message.capitalize()
 
 	return message
-'''
+
 # Publish to Twitter
 def tweet():
 	auth = tweepy.OAuthHandler(API_KEY, API_SECRET)
@@ -122,6 +122,3 @@ def tweet():
 		print "Found duplicate tweet"
 
 tweet()
-'''
-
-print createGoodTweet(wordLines)
